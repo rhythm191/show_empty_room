@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+  "name": "Show empty room",
+  "version": "0.1.0",
+  "description": "add link to show empty room in cybozu office top page",
+  "permissions": [
+    "tabs"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://cbasp8.air.ne.jp/*"
+      ],
+      "js": [
+        "index.js"
+      ]
+    }
+  ]
+}
