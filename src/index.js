@@ -30,7 +30,7 @@ function add_show_link() {
         <input type="hidden" name="SetDate.Day" value="${ date.day }">
         <input type="hidden" name="r" value="Calendar">
         <a href="#" onclick="show_confirm_view(this);">
-        施設状況
+         <img src="https://github.com/rhythm191/show_empty_room/raw/master/src/building.png" alt="施設状況" />
         </a>
       </form>
       </span>

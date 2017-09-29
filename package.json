@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "webpack": "webpack",
-    "build": "webpack && gulp manifest"
+    "build": "webpack --config webpack.config.production.js"
   },
   "repository": {
     "type": "git",
