@@ -58,3 +58,7 @@ typings/
 .env
 
 build/
+
+build.crx
+build.crx.zip
+build.pem

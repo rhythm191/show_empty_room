@@ -5,9 +5,9 @@
 
 # インストール方法
 
-1. この(https://github.com/rhythm191/show_empty_room/release/) からzipファイルをダウンロードする
-2. zipファイルを解凍する
-3. 生成されたshow_empty_room.crxをChromeにドラック&ドロップする
+1. この(https://github.com/rhythm191/show_empty_room/release/) からbuild.crx.zipファイルをダウンロードする。
+2. zipファイルを解凍する。
+3. 生成されたshow_empty_room.crxをChromeにドラック&ドロップする。
 
 # 使い方
 
