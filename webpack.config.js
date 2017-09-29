@@ -1,29 +1,24 @@
-import webpack from 'webpack'
+webpack = require('webpack')
 
 module.exports = {
-  entry: 'index.js',
+  entry: './src/index.js',
   output: {
     path: __dirname + '/build/',
-    publicPath: '../build/',
     filename: 'index.js'
-  },
-  resolve: {
-    modulesDirectories: ['node_modules', 'src'],
-    extensions: ['', '.js']
   },
   module: {
     loaders: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: "babel",
+        loader: "babel-loader",
         query:{
           presets: ['es2015']
         }
       }
     ]
-  },
-  plugins: [
-    new webpack.optimize.UglifyJsPlugin()
-  ],
+  }//,
+  // plugins: [
+  //   new webpack.optimize.UglifyJsPlugin()
+  // ],
 };
