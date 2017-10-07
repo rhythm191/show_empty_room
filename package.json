@@ -1,11 +1,12 @@
 {
   "name": "show_empty_room",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "add link to show empty room in cybozu office page",
   "main": "index.js",
   "scripts": {
     "webpack": "webpack",
-    "build": "webpack --config webpack.config.production.js"
+    "build": "NODE_ENV=production webpack && gulp manifest",
+    "clean": "rm -rf build"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,9 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.24.1",
+    "gulp": "^3.9.1",
+    "gulp-json-editor": "^2.2.1",
+    "gulp-load-plugins": "^1.5.0",
     "webpack": "^3.6.0"
   }
 }

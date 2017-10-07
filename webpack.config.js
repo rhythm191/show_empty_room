@@ -1,6 +1,6 @@
 webpack = require('webpack')
 
-module.exports = {
+webpack_config = {
   entry: './src/index.js',
   output: {
     path: __dirname + '/build/',
@@ -17,8 +17,15 @@ module.exports = {
         }
       }
     ]
-  }//,
-  // plugins: [
-  //   new webpack.optimize.UglifyJsPlugin()
-  // ],
+  },
+  devtool: 'inline-source-map',
+  plugins: []
 };
+
+
+if (process.env.NODE_ENV === 'production') {
+  webpack_config.devtool = false;
+  webpack_config.plugins.push(new webpack.optimize.UglifyJsPlugin())
+}
+
+module.exports = webpack_config
