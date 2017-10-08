@@ -1,8 +1,10 @@
-var webpack = require('webpack');
-var path = require('path');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+import webpack from 'webpack';
+import path from 'path';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
-var webpack_config = [{
+let isProduction = process.env.NODE_ENV === 'production'
+
+let webpack_config = [{
   context: path.join(__dirname, 'src'),
   entry: {
     content_scripts: './content_scripts.js',
@@ -25,7 +27,7 @@ var webpack_config = [{
       },
       {
         test: /\.sass$/,
-        loader: ExtractTextPlugin.extract('css-loader!sass-loader')
+        loader: ExtractTextPlugin.extract(`css-loader${isProduction ? '?minimize' : ''}!sass-loader`)
       }
     ]
   },
@@ -36,8 +38,8 @@ var webpack_config = [{
 }];
 
 
-if (process.env.NODE_ENV === 'production') {
-  webpack_config.each(function(config) {
+if (isProduction) {
+  webpack_config.forEach(function(config) {
     config.devtool = false
     config.plugins.push(new webpack.optimize.UglifyJsPlugin())
   });

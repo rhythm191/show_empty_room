@@ -21,6 +21,11 @@
   "dependencies": {
     "jquery": "^3.2.1"
   },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
