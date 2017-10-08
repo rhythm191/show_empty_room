@@ -4,8 +4,8 @@
   "description": "add link to show empty room in cybozu office page",
   "main": "index.js",
   "scripts": {
-    "webpack": "webpack",
-    "build": "NODE_ENV=production webpack && gulp manifest",
+    "webpack": "webpack && gulp",
+    "build": "NODE_ENV=production webpack && gulp",
     "clean": "rm -rf build"
   },
   "repository": {

@@ -9,3 +9,15 @@ gulp.task('manifest', () => {
     .pipe($.jsonEditor({ version: package.version }))
     .pipe(gulp.dest('build/'));
 });
+
+gulp.task('html', () => {
+  return gulp.src('src/**/*.html')
+    .pipe(gulp.dest('build/'));
+});
+
+gulp.task('image', () => {
+  return gulp.src('src/**/*.png')
+    .pipe(gulp.dest('build/'));
+});
+
+gulp.task('default', ['manifest', 'html', 'image'])

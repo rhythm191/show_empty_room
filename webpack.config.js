@@ -1,10 +1,13 @@
 webpack = require('webpack')
 
 webpack_config = {
-  entry: './src/index.js',
+  entry: {
+    content_scripts: './src/content_scripts.js',
+    popup: './src/popup.js'
+  },
   output: {
     path: __dirname + '/build/',
-    filename: 'index.js'
+    filename: '[name].js'
   },
   module: {
     loaders: [
