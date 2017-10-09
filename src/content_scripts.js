@@ -77,5 +77,7 @@ function date_to_hash(date) {
 $(function() {
   add_show_link();
 
-  $('body').append(show_confirm_view_string)
+  $('body').append(show_confirm_view_string);
+
+  chrome.runtime.sendMessage({}, function(response) {});
 });

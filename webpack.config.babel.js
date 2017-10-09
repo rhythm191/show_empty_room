@@ -7,6 +7,7 @@ let isProduction = process.env.NODE_ENV === 'production'
 let webpack_config = [{
   context: path.join(__dirname, 'src'),
   entry: {
+    background: './background.js',
     content_scripts: './content_scripts.js',
     popup: './popup.js',
     popup_style: './popup.sass'

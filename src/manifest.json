@@ -6,6 +6,10 @@
   "permissions": [
     "tabs"
   ],
+  "background": {
+    "scripts": ["background.js"],
+    "permissions": ["https://cbasp8.air.ne.jp/"]
+  },
   "content_scripts": [
     {
       "matches": [
@@ -16,7 +20,7 @@
       ]
     }
   ],
-  "browser_action": {
+  "page_action": {
     "default_icon": "building.png",
     "default_popup": "popup.html"
   }
