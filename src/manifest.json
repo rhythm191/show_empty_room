@@ -4,7 +4,8 @@
   "version": "0.1.0",
   "description": "add link to show empty room in cybozu office top page",
   "permissions": [
-    "tabs"
+    "tabs",
+    "storage"
   ],
   "background": {
     "scripts": ["background.js"],

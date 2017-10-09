@@ -29,7 +29,7 @@ function add_show_link() {
         <input type="hidden" name="SetDate.Month" value="${ date.month }">
         <input type="hidden" name="SetDate.Day" value="${ date.day }">
         <input type="hidden" name="r" value="Calendar">
-        <a href="#" onclick="show_confirm_view(this);">
+        <a href="#" class="js_show_empty_link">
          <img src="https://github.com/rhythm191/show_empty_room/raw/master/src/building.png" alt="施設状況" />
         </a>
       </form>
@@ -39,10 +39,9 @@ function add_show_link() {
   });
 }
 
-let show_confirm_view_string = `
-<script>
-function show_confirm_view( self ) {
-  let $form = $(self).closest('form');
+
+function show_confirm_view(e) {
+  let $form = $(this).closest('form');
 
   window.open("ag.cgi?page=AGBlank","Confirm","height=600,width=800,scrollbars=1,location=0,resizable=1");
   $form.get(0).target = "Confirm";
@@ -50,8 +49,6 @@ function show_confirm_view( self ) {
 
  return false;
 }
-</script>
-`
 
 function query_to_hash(queryString) {
   let query = queryString || location.search.replace(/\?/, "");
@@ -77,7 +74,21 @@ function date_to_hash(date) {
 $(function() {
   add_show_link();
 
-  $('body').append(show_confirm_view_string);
+  $('body').on('click', '.js_show_empty_link', show_confirm_view);
 
-  chrome.runtime.sendMessage({}, function(response) {});
+  $.ajax('ag.cgi?page=ScheduleEntry').then(function(response) {
+    let buildings = []
+
+    $(response).find('select[name="FCID"] option').each(function(i, option) {
+      let $option = $(option);
+
+      if($option.val() !== "") {
+        buildings.push({ id: $option.val(), text: $option.text() });
+      }
+    })
+
+    chrome.runtime.sendMessage({ buildings: buildings }, function(response) {});
+  });
+
+
 });
