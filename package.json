@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "webpack": "webpack && gulp",
+    "watch": "webpack --watch && gulp watch",
     "build": "NODE_ENV=production webpack && gulp",
     "clean": "rm -rf build"
   },

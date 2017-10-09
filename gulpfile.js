@@ -21,3 +21,9 @@ gulp.task('image', () => {
 });
 
 gulp.task('default', ['manifest', 'html', 'image'])
+
+gulp.task('watch', function() {
+  gulp.watch('src/manifest.json', ['manifest']);
+  gulp.watch('src/**/*.html', ['html']);
+  gulp.watch('src/**/*.png', ['image']);
+});
