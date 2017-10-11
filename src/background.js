@@ -6,10 +6,11 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
     request.buildings.forEach(function(building) {
       selected.push(Number(building.id));
     });
-    if (Array.isArray(value)) {
-      selected = value
+
+    if (Array.isArray(value.selected)) {
+      selected = value.selected
     }
 
-    chrome.storage.sync.set({ 'buildings': request.buildings, 'selected': selected });
+    chrome.storage.sync.set({ 'buildings': request.buildings, 'selected': selected, 'value': value });
   });
 });

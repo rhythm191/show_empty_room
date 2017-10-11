@@ -79,16 +79,20 @@ function date_to_hash(date) {
   }
 }
 
+let selected = [];
+
+add_show_link();
+
+// chrome.storage.sync.get('selected', function(settings) {
+//   if (!!selected) {
+//     set_building_form(selected);
+//   }
+// });
+
+// chrome.storage.local.remove(['selected', 'value']);
+
 // リンクを追加
 $(function() {
-  add_show_link();
-
-  // chrome.storage.sync.get('selected', function(settings) {
-  //   if (!!selected) {
-  //     set_building_form(selected);
-  //   }
-  // });
-
 
   $('body').on('click', '.js_show_empty_link', show_confirm_view);
 
@@ -101,11 +105,9 @@ $(function() {
       if($option.val() !== "") {
         buildings.push({ id: $option.val(), text: $option.text() });
       }
-    })
-
-    chrome.runtime.sendMessage({ buildings: buildings }, function(response) {
-
     });
+
+    chrome.runtime.sendMessage({ 'buildings': buildings }, function(response) {});
   });
 
 
