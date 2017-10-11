@@ -15,7 +15,7 @@ function add_show_link() {
         <input type="hidden" name="page" value="ScheduleEmpty">
         <input type="hidden" name="Date" value="${ query['Date'] }">
         <input type="hidden" name="BDate" value="${ query['BDate'] }">
-        <select name="sFID" style="display: none;" multiple>
+        <select name="sFID" class="js_building_form" style="display: none;" multiple>
           <option value="319" selected></option>
           <option value="685" selected></option>
           <option value="686" selected></option>
@@ -61,6 +61,15 @@ function query_to_hash(queryString) {
   }, {});
 };
 
+function set_building_form(selected) {
+  let $building_form = $('.js_building_form');
+
+  $building_form.html('');
+  selected.forEach(function(value) {
+    $building_form.append(`<option value="${ value }" selected></option>`)
+  })
+}
+
 function date_to_hash(date) {
   let list = date.split('.')
   return {
@@ -73,6 +82,13 @@ function date_to_hash(date) {
 // リンクを追加
 $(function() {
   add_show_link();
+
+  // chrome.storage.sync.get('selected', function(settings) {
+  //   if (!!selected) {
+  //     set_building_form(selected);
+  //   }
+  // });
+
 
   $('body').on('click', '.js_show_empty_link', show_confirm_view);
 
@@ -87,7 +103,9 @@ $(function() {
       }
     })
 
-    chrome.runtime.sendMessage({ buildings: buildings }, function(response) {});
+    chrome.runtime.sendMessage({ buildings: buildings }, function(response) {
+
+    });
   });
 
 
