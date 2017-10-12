@@ -79,36 +79,27 @@ function date_to_hash(date) {
   }
 }
 
-let selected = [];
-
 add_show_link();
 
-// chrome.storage.sync.get('selected', function(settings) {
-//   if (!!selected) {
-//     set_building_form(selected);
-//   }
-// });
+$('body').on('click', '.js_show_empty_link', show_confirm_view);
 
-// chrome.storage.local.remove(['selected', 'value']);
+chrome.storage.sync.get('selected', function(settings) {
+  if (!!settings.selected && Array.isArray(settings.selected)) {
+    set_building_form(settings.selected);
+  }
+});
 
-// リンクを追加
-$(function() {
 
-  $('body').on('click', '.js_show_empty_link', show_confirm_view);
+$.ajax('ag.cgi?page=ScheduleEntry').then(function(response) {
+  let buildings = []
 
-  $.ajax('ag.cgi?page=ScheduleEntry').then(function(response) {
-    let buildings = []
+  $(response).find('select[name="FCID"] option').each(function(i, option) {
+    let $option = $(option);
 
-    $(response).find('select[name="FCID"] option').each(function(i, option) {
-      let $option = $(option);
-
-      if($option.val() !== "") {
-        buildings.push({ id: $option.val(), text: $option.text() });
-      }
-    });
-
-    chrome.runtime.sendMessage({ 'buildings': buildings }, function(response) {});
+    if($option.val() !== "") {
+      buildings.push({ id: $option.val(), text: $option.text() });
+    }
   });
 
-
+  chrome.runtime.sendMessage({ 'buildings': buildings }, function(response) {});
 });
