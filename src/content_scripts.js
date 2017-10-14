@@ -2,6 +2,7 @@
 
 import $ from 'jquery'
 
+// 空き施設を見るリンクを追加する
 function add_show_link() {
   let $weekdays = $('.weekhead:first .weekday')
   $weekdays.each(function($day) {
@@ -16,14 +17,6 @@ function add_show_link() {
         <input type="hidden" name="Date" value="${ query['Date'] }">
         <input type="hidden" name="BDate" value="${ query['BDate'] }">
         <select name="sFID" class="js_building_form" style="display: none;" multiple>
-          <option value="319" selected></option>
-          <option value="685" selected></option>
-          <option value="686" selected></option>
-          <option value="691" selected></option>
-          <option value="692" selected></option>
-          <option value="693" selected></option>
-          <option value="694" selected></option>
-          <option value="1800" selected></option>
         </select>
         <input type="hidden" name="SetDate.Year" value="${ date.year }">
         <input type="hidden" name="SetDate.Month" value="${ date.month }">
@@ -39,7 +32,7 @@ function add_show_link() {
   });
 }
 
-
+// 建物アイコンをクリックした時に新しいウインドウで空き施設を表示させる
 function show_confirm_view(e) {
   let $form = $(this).closest('form');
 
@@ -50,6 +43,7 @@ function show_confirm_view(e) {
  return false;
 }
 
+// 検索クエリをHashに変換する
 function query_to_hash(queryString) {
   let query = queryString || location.search.replace(/\?/, "");
   return query.split("&").reduce(function(obj, item, i) {
@@ -61,6 +55,17 @@ function query_to_hash(queryString) {
   }, {});
 };
 
+// 選択した施設情報を設定から読み込み、フォームに反映させる
+function sync_selected_buildings() {
+  chrome.storage.sync.get('selected', function(settings) {
+    if (!!settings.selected && Array.isArray(settings.selected)) {
+      set_building_form(settings.selected);
+    }
+  });
+}
+
+// 引数の施設IDをそれぞれのリンクのフォームに反映させる
+// selected {Array}
 function set_building_form(selected) {
   let $building_form = $('.js_building_form');
 
@@ -70,6 +75,8 @@ function set_building_form(selected) {
   })
 }
 
+// 日付文字をHashに変換する
+// date {String}  ex. 2017.10.14
 function date_to_hash(date) {
   let list = date.split('.')
   return {
@@ -83,12 +90,7 @@ add_show_link();
 
 $('body').on('click', '.js_show_empty_link', show_confirm_view);
 
-chrome.storage.sync.get('selected', function(settings) {
-  if (!!settings.selected && Array.isArray(settings.selected)) {
-    set_building_form(settings.selected);
-  }
-});
-
+sync_selected_buildings();
 
 $.ajax('ag.cgi?page=ScheduleEntry').then(function(response) {
   let buildings = []
@@ -102,4 +104,10 @@ $.ajax('ag.cgi?page=ScheduleEntry').then(function(response) {
   });
 
   chrome.runtime.sendMessage({ 'buildings': buildings }, function(response) {});
+});
+
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+  if (request.message === "setting_update") {
+    sync_selected_buildings();
+  }
 });

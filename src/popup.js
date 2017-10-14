@@ -15,6 +15,13 @@ chrome.storage.sync.get(function(settings) {
     })
     settings.selected = selected;
 
-    chrome.storage.sync.set(settings);
+    // 設定を更新してcontent_scripts.jsにメッセージを送る
+    chrome.storage.sync.set(settings, function() {
+      chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, {message: "setting_update"}, function(response) {
+          console.log(response.farewell);
+        });
+      });
+    });
   });
 });
