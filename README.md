@@ -15,6 +15,9 @@
 トップページ、及び、グループ週表示の一番上の日付表示の部分のビルアイコンをクリックすることで、
 空き施設情報のポップアップが表示されます。
 
+また、Chromeのツールバーにある建物アイコンから表示する空き施設を選択することができます。
+
+![スクリーンショット](https://github.com/rhythm191/show_empty_room/raw/master/popup_screenshot.jpg)
 
 ## Contributing
 
