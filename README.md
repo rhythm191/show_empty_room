@@ -5,6 +5,11 @@
 
 # インストール方法
 
+Chrome ウェブストアからインストールしてください。
+https://chrome.google.com/webstore/detail/show-empty-room/enlbfclhmfiodjbgocnnjcmllijbagce?hl=ja
+
+または、次の方法を使ってください。
+
 1. この(https://github.com/rhythm191/show_empty_room/releases) から生成されたshow_empty_room.crx.zipファイルをダウンロードする。
 2. zipファイルを解凍する。
 3. [chrome://extensions/](chrome://extensions/) を開く
